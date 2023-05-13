@@ -12,12 +12,13 @@ import { Request, Response } from "express";
   app.use(bodyParser.json());
 
   app.get("/filteredimage/", async (req: Request, res: Response) => {
-    const { image_url } = req.query;
+    const { image_url }: { image_url: string } = req.query;
     if (!image_url) {
       return res.status(422).send("Image URL need to be required");
     }
     filterImageFromURL(image_url)
       .then((imgResult) => {
+        res.status(200).send("Filter image successfully");
         res.sendFile(imgResult);
         res.on("finish", () => deleteLocalFiles([imgResult]));
       })
