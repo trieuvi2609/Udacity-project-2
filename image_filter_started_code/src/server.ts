@@ -12,7 +12,7 @@ import { Request, Response } from "express";
   app.use(bodyParser.json());
 
   app.get("/filteredimage/", async (req: Request, res: Response) => {
-    const { image_url }: any = req.query;
+    const { image_url } = req.query;
     if (!image_url) {
       return res.status(422).send("Image URL need to be required");
     }
